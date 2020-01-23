@@ -38,7 +38,7 @@
             eventLimit: true, // allow "more" link when too many events
             eventLimitText: "ПОКАЗАТИ БІЛЬШЕ", 
             eventOrder: "rgc_territory", //Сортировка 
-            eventOrder: "time_interval", //Сортировка по интервалу
+            //eventOrder: "time_interval", //Сортировка по интервалу
 
             eventClick: function(event) {
                 if (event.url) {
@@ -62,8 +62,9 @@
                         var events = [];
                         JSON.parse(req.responseText).value.forEach(function(v) {
                             let regResult = v.rgc_name.match(/[0-9]{10}/g);
+                            console.log(v._rgc_territory_value);
                             events.push(
-                                {
+                                {                                    
                                     title:
                                         "Територия: "  + get_rgcTerritoryName(v._rgc_territory_value) + "\n" +
                                         "Заявка для: " + regResult[0] + "\n" +
@@ -154,12 +155,17 @@ function get_reasonVerificationName(type) {
 }
 function get_rgcTerritoryName(type) {
     let arr = {
-        '87279378-0c32-ea11-b80d-02bf0a300f39': "Чугуївська дільниця",
+        '87279378-0c32-ea11-b80d-02bf0a300f39' : "Чугуївська дільниця",
+        '51279378-0c32-ea11-b80d-02bf0a300f39' : "Краснокутська дільниця",
+        '57279378-0c32-ea11-b80d-02bf0a300f39' : "Красноградська дільниця",
+        '6f279378-0c32-ea11-b80d-02bf0a300f39' : "Ізюмська дільниця",
+        '89279378-0c32-ea11-b80d-02bf0a300f39' : "Балаклійська дільниця",
     }
-    if(arr[type]!= undefined){
+    /*if(arr[type]!= undefined){
         return arr[type];
     }
-    else return "Unknown"
+    else return "Unknown"*/
+        return arr[type.toLowerCase()];
 }
     </script>
     <style>
